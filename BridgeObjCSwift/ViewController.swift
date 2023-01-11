@@ -8,11 +8,25 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var data = NSMutableArray()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let model = CustomViewModel()
+        model.getData(postsURL) { data in
+            print("Getting Data")
+            guard let returnData = data else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.data = returnData
+            }
+            
+        }
+        
     }
+    
 
 
 }
